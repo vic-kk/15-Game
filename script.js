@@ -8,7 +8,7 @@ const getTags = () => square.getElementsByTagName("b");
 const beginGame = () => {
   const initial = [];
   const refactor = [];
-  while (initial.length <= 15) { initial.push(initial.length) };
+  while (initial.length <= 15) { initial.push(initial.length); }
   while (initial.length > 0) {
     const element = initial.splice(~~(Math.random() * initial.length), 1)[0];
     if (element === 0) NULL_ID = refactor.length;
@@ -32,7 +32,7 @@ const move = (fromId, toId, dir) => { //move "brick" from-to, direction
     WAIT_ANIM = false;
     checkWinner();
   }, time);
-}
+};
 
 const checkWinner = () => { //checking the end of the game
   const mass = getTags(); //mass of fields
@@ -40,10 +40,10 @@ const checkWinner = () => { //checking the end of the game
     if (i != mass[i-1].innerHTML) break;
     if (i == 1) {
       alert("winner");
-      beginGame();
+      // beginGame();
     }
   }
-}
+};
 
 const clickHandler = (e) => { //move cheking
   const { target: el } = e;
@@ -64,9 +64,9 @@ const clickHandler = (e) => { //move cheking
         if ((ELEM_ID % 4) + 1 == NULL_ID % 4) return "right";
       }
     }
-    move(ELEM_ID, NULL_ID, direction())
+    move(ELEM_ID, NULL_ID, direction());
   }
-}
+};
 
 again.onclick = beginGame;
 square.onclick = clickHandler;
