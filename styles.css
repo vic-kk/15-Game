@@ -1,0 +1,68 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  background: #343436;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#again {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  border: 1px solid white;
+  padding: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 50%;
+}
+#again:hover {
+  background-color: green;
+  cursor: pointer;
+  color: inherit;
+}
+#square {
+  width: 80vh;
+  height: 80vh;
+  padding: 0.5vh;
+  text-align: center;
+  border: 10px solid black;
+  border-radius: 10%;
+  background: white;
+}
+#square b {
+  display: inline-block;
+  width: 19vh;
+  line-height: 19vh;
+  vertical-align: middle;
+  font-size: 14vh;
+  text-align: center;
+  margin: 0.5vh;
+  background: linear-gradient(to left top, #000000, #A2A2A2);
+  color: white;
+  border-radius: 30%;
+  transition: all 0.1s;
+}
+#square b:hover {
+  background: linear-gradient(to left top, #2F2F2F, #DEDBDB);
+  cursor: pointer;
+}
+#square b.--up {
+  transform: translateY(-105%);
+}
+#square b.--down {
+  transform: translateY(105%);
+}
+#square b.--left {
+  transform: translateX(-105%);
+}
+#square b.--right {
+  transform: translateX(105%);
+}
