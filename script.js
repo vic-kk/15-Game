@@ -54,7 +54,6 @@ const clickHandler = (e) => { //move cheking
     for (let i = 0; i < mass.length; i++) {
       if (mass[ELEM_ID = i].innerHTML == el.innerHTML) break;
     }
-    if (!ELEM_ID) return;
     const direction = () => {
       if (ELEM_ID % 4 == NULL_ID % 4) { //in column
         if (ELEM_ID - 4 == NULL_ID) return "up";
@@ -63,7 +62,7 @@ const clickHandler = (e) => { //move cheking
       if (~~(ELEM_ID / 4) == ~~(NULL_ID / 4)) { // in row
         if ((ELEM_ID % 4) - 1 == NULL_ID % 4) return "left";
         if ((ELEM_ID % 4) + 1 == NULL_ID % 4) return "right";
-      } 
+      }
     }
     move(ELEM_ID, NULL_ID, direction())
   }
