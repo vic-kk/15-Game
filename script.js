@@ -49,7 +49,7 @@ const checkWinner = () => { //checking the end of the game
 
 const clickHandler = (e) => { //move cheking
   const { target: el } = e;
-  if (waitAnim && el.childElementCount) return;
+  if (waitAnim || el.childElementCount) return;
   if (el.innerHTML) {
     for (let i = 0; i <= NUMBERS; i++) {
       if (mass[elId = i].innerHTML == el.innerHTML) break;
