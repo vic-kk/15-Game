@@ -20,7 +20,7 @@ const beginNewGame = () => {
 const moveBrick = (from_id, to_id, direction) => {
   if (!direction) return;
   WAIT_ANIM = true;
-  const mass = getArryaOfB(); // mass of fields
+  const mass = getArryaOfB();
   const delay = getComputedStyle(mass[from_id]).transitionDuration.replace(/[a-z]/,'') * 1000;
   mass[from_id].classList.add(`--${direction}`);
   setTimeout(() => {
@@ -41,7 +41,7 @@ const checkWinner = () => {
   }
 };
 
-const clickHandler = ({ target, target: { dataset, tagName } } = e) => { // move cheking
+const clickHandler = ({ target, target: { dataset, tagName } } = e) => {
   if (WAIT_ANIM || tagName != 'B') return;
   if (dataset.id) {
     const ELEM_ID = getArryaOfB().indexOf(target);
