@@ -43,7 +43,7 @@ const checkWinner = () => {
 
 const clickHandler = (e) => { //move cheking
   const { target: el } = e;
-  if (WAIT_ANIM || el.childElementCount) return;
+  if (WAIT_ANIM || el.tagName!='B') return;
   if (el.dataset.id) {
     const ELEM_ID = [...getCollectionOfB()].indexOf(el);
     const moveDirection = (() => {
