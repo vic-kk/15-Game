@@ -12,7 +12,7 @@ const beginNewGame = () => {
   while (initial.length > 0) {
     const element = initial.splice(~~(Math.random() * initial.length), 1)[0];
     if (element === 0) NULL_ID = refactor.length;
-    refactor.push(`<b data-id=${refactor.length}>${element || ''}</b>`);
+    refactor.push(`<b data-brick=${refactor.length}>${element || ''}</b>`);
   }
   square.innerHTML = refactor.join('');
 };
@@ -42,22 +42,20 @@ const checkWinner = () => {
 };
 
 const clickHandler = ({ target, target: { dataset, tagName } } = e) => {
-  if (WAIT_ANIM || tagName != 'B') return;
-  if (dataset.id) {
-    const ELEM_ID = getArryaOfB().indexOf(target);
-    const moveDirection = (() => {
-      if (ELEM_ID % 4 == NULL_ID % 4) { // in column
-        if (ELEM_ID - 4 == NULL_ID) return "up";
-        if (ELEM_ID + 4 == NULL_ID) return "down";
-      }
-      if (~~(ELEM_ID / 4) == ~~(NULL_ID / 4)) { // in row
-        if ((ELEM_ID % 4) - 1 == NULL_ID % 4) return "left";
-        if ((ELEM_ID % 4) + 1 == NULL_ID % 4) return "right";
-      }
-      return null;
-    })();
-    if (moveDirection) moveBrick(ELEM_ID, NULL_ID, moveDirection);
-  }
+  if (WAIT_ANIM || tagName != 'B' && dataset.brick) return;
+  const ELEM_ID = getArryaOfB().indexOf(target);
+  const moveDirection = (() => {
+    if (ELEM_ID % 4 == NULL_ID % 4) { // in column
+      if (ELEM_ID - 4 == NULL_ID) return "up";
+      if (ELEM_ID + 4 == NULL_ID) return "down";
+    }
+    if (~~(ELEM_ID / 4) == ~~(NULL_ID / 4)) { // in row
+      if ((ELEM_ID % 4) - 1 == NULL_ID % 4) return "left";
+      if ((ELEM_ID % 4) + 1 == NULL_ID % 4) return "right";
+    }
+    return null;
+  })();
+  if (moveDirection) moveBrick(ELEM_ID, NULL_ID, moveDirection);
 };
 
 again.onclick = beginNewGame;
