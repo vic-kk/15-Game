@@ -5,10 +5,10 @@ let WAIT_ANIM = false;
 
 const getCollectionOfB = () => square.getElementsByTagName("b");
 
-const beginGame = () => {
+const beginNewGame = () => {
   const initial = [];
-  const refactor = [];
   while (initial.length <= 15) { initial.push(initial.length); }
+  const refactor = [];
   while (initial.length > 0) {
     const element = initial.splice(~~(Math.random() * initial.length), 1)[0];
     if (element === 0) NULL_ID = refactor.length;
@@ -17,21 +17,20 @@ const beginGame = () => {
   square.innerHTML = refactor.join('');
 };
 
-const moveBrick = (from_Id, to_Id, direction) => { //move "brick" from-to, direction
+const moveBrick = (from_Id, to_Id, direction) => {
   if (!direction) return;
   WAIT_ANIM = true;
   const mass = getCollectionOfB(); //mass of fields
   mass[from_Id].classList.add(`--${direction}`);
-  //get time for timeout from css
-  const time = getComputedStyle(mass[from_Id]).transitionDuration.replace(/[a-z]/,'') * 1000;
-  setTimeout(function() {
+  const delay = getComputedStyle(mass[from_Id]).transitionDuration.replace(/[a-z]/,'') * 1000;
+  setTimeout(() => {
     mass[from_Id].classList.remove(`--${direction}`);
     mass[to_Id].innerHTML = mass[from_Id].innerHTML;
     mass[from_Id].innerHTML = '';
     NULL_ID = from_Id;
     WAIT_ANIM = false;
     checkWinner();
-  }, time);
+  }, delay);
 };
 
 const checkWinner = () => {
@@ -62,6 +61,6 @@ const clickHandler = (e) => { //move cheking
   }
 };
 
-again.onclick = beginGame;
+again.onclick = beginNewGame;
 square.onclick = clickHandler;
-beginGame();
+beginNewGame();
