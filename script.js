@@ -1,7 +1,7 @@
 const square = document.getElementById("square");
 const again = document.getElementById("again");
 let NULL_ID = 0;
-let WAIT_ANIM = false;
+let WAIT_ANIMATION = false;
 
 const getArryaOfB = () => [...square?.getElementsByTagName("b")];
 
@@ -27,7 +27,7 @@ const checkWinner = () => {
 
 const moveBrick = (from_id, to_id, direction) => {
   if (!direction) return;
-  WAIT_ANIM = true;
+  WAIT_ANIMATION = true;
   const mass = getArryaOfB();
   const delay = getComputedStyle(mass[from_id]).transitionDuration.replace(/[a-z]/,'') * 1000;
   mass[from_id].classList.add(`--${direction}`);
@@ -36,13 +36,14 @@ const moveBrick = (from_id, to_id, direction) => {
     mass[from_id].classList.remove(`--${direction}`);
     mass[from_id].innerHTML = '';
     NULL_ID = from_id;
-    WAIT_ANIM = false;
+    WAIT_ANIMATION = false;
     checkWinner();
   }, delay);
 };
 
 const clickHandler = ({ target, target: { dataset, tagName } } = e) => {
-  if (WAIT_ANIM || tagName != 'B' && dataset.brick) return;
+  debugger;
+  if (WAIT_ANIMATION || tagName != 'B' && !dataset.hasOwnProperty('brick')) return;
   const ELEM_ID = getArryaOfB().indexOf(target);
   const moveDirection = (() => {
     if (ELEM_ID % 4 == NULL_ID % 4) { // in column
