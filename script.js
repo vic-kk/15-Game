@@ -49,7 +49,7 @@ const clickHandler = (e) => { //move cheking
   const { target: el } = e;
   if (WAIT_ANIM || el.childElementCount) return;
   if (el.dataset.id) {
-    const ELEM_ID = [...getTags()].indexOf(el);
+    const ELEM_ID = +el.dataset.id;
     const direction = (() => {
       if (ELEM_ID % 4 == NULL_ID % 4) { //in column
         if (ELEM_ID - 4 == NULL_ID) return "up";
