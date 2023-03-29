@@ -11,9 +11,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: sans-serif;
 }
-#again {
+#newGame {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -26,7 +25,7 @@ body {
   border-radius: 10px;
   transition: color 0.2s, background-color 0.2s;
 }
-#again:hover {
+#newGame:hover {
   background-color: green;
   cursor: pointer;
   color: white;
@@ -36,27 +35,27 @@ body {
   grid-template-columns: repeat(4, 1fr);
   width: 80vh;
   height: 80vh;
-  padding: 1vh;
-  gap: 1vh;
-  border: 10px solid black;
-  border-radius: 10%;
-  background: black;
+  gap: 1.5vh;
+  padding: 1.5vh;
+  border: 1vh solid grey;
+  border-radius: 5%;
+  background: #141414;
+  font-size: 10vh;
 }
 #square b {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 10vh;
+  border-radius: 10%;
   color: black;
-  border-radius: 30%;
-  background: white;
+  background-color: white;
   transition: transform 0.1s;
 }
 #square b:empty {
   visibility: hidden;
 }
 #square b:hover {
-  background: #9F9F9F;
+  background-color: #4ecd9e;
   cursor: pointer;
 }
 #square b.--up {

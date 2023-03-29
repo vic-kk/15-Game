@@ -1,5 +1,5 @@
 const square = document.getElementById("square");
-const again = document.getElementById("again");
+const newGame = document.getElementById("newGame");
 let WAIT_ANIMATION = false;
 
 const getBricksArray = () => [...square?.childNodes];
@@ -57,6 +57,6 @@ const fieldClickHandler = ({ target: { dataset: clicked_brick } } = e) => {
   if (moveDirection) moveBrick(clicked_id, null_id, moveDirection);
 };
 
-again.onclick = beginNewGame;
+newGame.onclick = beginNewGame;
 square.onclick = fieldClickHandler;
 beginNewGame();
