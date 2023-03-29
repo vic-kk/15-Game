@@ -17,25 +17,25 @@ const beginGame = () => {
   square.innerHTML = refactor.join('');
 };
 
-const moveBrick = (fromId, toId, dir) => { //move "brick" from-to, direction
-  if (!dir) return;
+const moveBrick = (from_Id, to_Id, direction) => { //move "brick" from-to, direction
+  if (!direction) return;
   WAIT_ANIM = true;
   const mass = getCollectionOfB(); //mass of fields
-  mass[fromId].classList.add("--"+dir);
+  mass[from_Id].classList.add(`--${direction}`);
   //get time for timeout from css
-  const time = getComputedStyle(mass[fromId]).transitionDuration.replace(/[a-z]/,'') * 1000;
+  const time = getComputedStyle(mass[from_Id]).transitionDuration.replace(/[a-z]/,'') * 1000;
   setTimeout(function() {
-    mass[fromId].classList.remove("--"+dir);
-    mass[toId].innerHTML = mass[fromId].innerHTML;
-    mass[fromId].innerHTML = "";
-    NULL_ID = fromId;
+    mass[from_Id].classList.remove(`--${direction}`);
+    mass[to_Id].innerHTML = mass[from_Id].innerHTML;
+    mass[from_Id].innerHTML = '';
+    NULL_ID = from_Id;
     WAIT_ANIM = false;
     checkWinner();
   }, time);
 };
 
-const checkWinner = () => { //checking the end of the game
-  const mass = getCollectionOfB(); //mass of fields
+const checkWinner = () => {
+  const mass = getCollectionOfB();
   for (var i = mass.length-1; i > 0; i--) {
     if (i != mass[i-1].innerHTML) break;
     if (i == 1) alert("winner");
@@ -47,8 +47,8 @@ const clickHandler = (e) => { //move cheking
   if (WAIT_ANIM || el.childElementCount) return;
   if (el.dataset.id) {
     const ELEM_ID = [...getCollectionOfB()].indexOf(el);
-    const direction = (() => {
-      if (ELEM_ID % 4 == NULL_ID % 4) { //in column
+    const moveDirection = (() => {
+      if (ELEM_ID % 4 == NULL_ID % 4) { // in column
         if (ELEM_ID - 4 == NULL_ID) return "up";
         if (ELEM_ID + 4 == NULL_ID) return "down";
       }
@@ -58,7 +58,7 @@ const clickHandler = (e) => { //move cheking
       }
       return null;
     })();
-    if (direction) moveBrick(ELEM_ID, NULL_ID, direction);
+    if (moveDirection) moveBrick(ELEM_ID, NULL_ID, moveDirection);
   }
 };
 
