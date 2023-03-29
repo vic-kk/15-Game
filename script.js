@@ -1,6 +1,6 @@
 const square = document.getElementById("square");
 const again = document.getElementById("again");
-let NULL_ID = null;
+let NULL_ID = 0;
 let WAIT_ANIM = false;
 
 const getTags = () => square.getElementsByTagName("b");
@@ -12,12 +12,12 @@ const beginGame = () => {
   while (initial.length > 0) {
     const element = initial.splice(~~(Math.random() * initial.length), 1)[0];
     if (element === 0) NULL_ID = refactor.length;
-    refactor.push(`<b>${element || ''}</b>`);
+    refactor.push(`<b data-id=${refactor.length}>${element || ''}</b>`);
   }
   square.innerHTML = refactor.join('');
 };
 
-const move = (fromId, toId, dir) => { //move "brick" from-to, direction
+const moveBrick = (fromId, toId, dir) => { //move "brick" from-to, direction
   if (!dir) return;
   WAIT_ANIM = true;
   const mass = getTags(); //mass of fields
@@ -48,13 +48,9 @@ const checkWinner = () => { //checking the end of the game
 const clickHandler = (e) => { //move cheking
   const { target: el } = e;
   if (WAIT_ANIM || el.childElementCount) return;
-  if (el.innerHTML) {
-    let ELEM_ID = null;
-    const mass = getTags(); //mass of fields
-    for (let i = 0; i < mass.length; i++) {
-      if (mass[ELEM_ID = i].innerHTML == el.innerHTML) break;
-    }
-    const direction = () => {
+  if (el.dataset.id) {
+    const ELEM_ID = [...getTags()].indexOf(el);
+    const direction = (() => {
       if (ELEM_ID % 4 == NULL_ID % 4) { //in column
         if (ELEM_ID - 4 == NULL_ID) return "up";
         if (ELEM_ID + 4 == NULL_ID) return "down";
@@ -63,8 +59,8 @@ const clickHandler = (e) => { //move cheking
         if ((ELEM_ID % 4) - 1 == NULL_ID % 4) return "left";
         if ((ELEM_ID % 4) + 1 == NULL_ID % 4) return "right";
       }
-    };
-    move(ELEM_ID, NULL_ID, direction());
+    })();
+    if (direction) moveBrick(ELEM_ID, NULL_ID, direction);
   }
 };
 
