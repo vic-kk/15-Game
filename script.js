@@ -59,6 +59,7 @@ const clickHandler = (e) => { //move cheking
         if ((ELEM_ID % 4) - 1 == NULL_ID % 4) return "left";
         if ((ELEM_ID % 4) + 1 == NULL_ID % 4) return "right";
       }
+      return null;
     })();
     if (direction) moveBrick(ELEM_ID, NULL_ID, direction);
   }
