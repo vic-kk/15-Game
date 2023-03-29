@@ -3,7 +3,7 @@ const again = document.getElementById("again");
 let NULL_ID = 0;
 let WAIT_ANIM = false;
 
-const getCollectionOfB = () => square.getElementsByTagName("b");
+const getCollectionOfB = () => [...square.getElementsByTagName("b")];
 
 const beginNewGame = () => {
   const initial = [];
@@ -45,7 +45,7 @@ const clickHandler = (e) => { //move cheking
   const { target: el } = e;
   if (WAIT_ANIM || el.tagName!='B') return;
   if (el.dataset.id) {
-    const ELEM_ID = [...getCollectionOfB()].indexOf(el);
+    const ELEM_ID = getCollectionOfB().indexOf(el);
     const moveDirection = (() => {
       if (ELEM_ID % 4 == NULL_ID % 4) { // in column
         if (ELEM_ID - 4 == NULL_ID) return "up";
