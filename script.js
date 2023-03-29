@@ -3,7 +3,7 @@ const again = document.getElementById("again");
 let NULL_ID = 0;
 let WAIT_ANIM = false;
 
-const getArryaOfB = () => [...square.getElementsByTagName("b")];
+const getArryaOfB = () => [...square?.getElementsByTagName("b")];
 
 const beginNewGame = () => {
   const initial = [];
