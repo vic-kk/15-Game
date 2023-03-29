@@ -3,7 +3,7 @@ const again = document.getElementById("again");
 let NULL_ID = 0;
 let WAIT_ANIM = false;
 
-const getTags = () => square.getElementsByTagName("b");
+const getCollectionOfB = () => square.getElementsByTagName("b");
 
 const beginGame = () => {
   const initial = [];
@@ -20,7 +20,7 @@ const beginGame = () => {
 const moveBrick = (fromId, toId, dir) => { //move "brick" from-to, direction
   if (!dir) return;
   WAIT_ANIM = true;
-  const mass = getTags(); //mass of fields
+  const mass = getCollectionOfB(); //mass of fields
   mass[fromId].classList.add("--"+dir);
   //get time for timeout from css
   const time = getComputedStyle(mass[fromId]).transitionDuration.replace(/[a-z]/,'') * 1000;
@@ -35,13 +35,10 @@ const moveBrick = (fromId, toId, dir) => { //move "brick" from-to, direction
 };
 
 const checkWinner = () => { //checking the end of the game
-  const mass = getTags(); //mass of fields
+  const mass = getCollectionOfB(); //mass of fields
   for (var i = mass.length-1; i > 0; i--) {
     if (i != mass[i-1].innerHTML) break;
-    if (i == 1) {
-      alert("winner");
-      // beginGame();
-    }
+    if (i == 1) alert("winner");
   }
 };
 
@@ -49,8 +46,7 @@ const clickHandler = (e) => { //move cheking
   const { target: el } = e;
   if (WAIT_ANIM || el.childElementCount) return;
   if (el.dataset.id) {
-    // const ELEM_ID = [...getTags()].indexOf(el);
-    const ELEM_ID = +el.dataset.id;
+    const ELEM_ID = [...getCollectionOfB()].indexOf(el);
     const direction = (() => {
       if (ELEM_ID % 4 == NULL_ID % 4) { //in column
         if (ELEM_ID - 4 == NULL_ID) return "up";
