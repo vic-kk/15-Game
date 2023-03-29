@@ -41,7 +41,7 @@ const checkWinner = () => {
   }
 };
 
-const clickHandler = (e) => { //move cheking
+const clickHandler = (e) => { // move cheking
   const { target: el } = e;
   if (WAIT_ANIM || el.tagName!='B') return;
   if (el.dataset.id) {
