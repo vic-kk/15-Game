@@ -3,7 +3,7 @@ const again = document.getElementById("again");
 let NULL_ID = 0;
 let WAIT_ANIM = false;
 
-const getCollectionOfB = () => [...square.getElementsByTagName("b")];
+const getArryaOfB = () => [...square.getElementsByTagName("b")];
 
 const beginNewGame = () => {
   const initial = [];
@@ -17,35 +17,34 @@ const beginNewGame = () => {
   square.innerHTML = refactor.join('');
 };
 
-const moveBrick = (from_Id, to_Id, direction) => {
+const moveBrick = (from_id, to_id, direction) => {
   if (!direction) return;
   WAIT_ANIM = true;
-  const mass = getCollectionOfB(); // mass of fields
-  mass[from_Id].classList.add(`--${direction}`);
-  const delay = getComputedStyle(mass[from_Id]).transitionDuration.replace(/[a-z]/,'') * 1000;
+  const mass = getArryaOfB(); // mass of fields
+  const delay = getComputedStyle(mass[from_id]).transitionDuration.replace(/[a-z]/,'') * 1000;
+  mass[from_id].classList.add(`--${direction}`);
   setTimeout(() => {
-    mass[from_Id].classList.remove(`--${direction}`);
-    mass[to_Id].innerHTML = mass[from_Id].innerHTML;
-    mass[from_Id].innerHTML = '';
-    NULL_ID = from_Id;
+    mass[to_id].innerHTML = mass[from_id].innerHTML;
+    mass[from_id].classList.remove(`--${direction}`);
+    mass[from_id].innerHTML = '';
+    NULL_ID = from_id;
     WAIT_ANIM = false;
     checkWinner();
   }, delay);
 };
 
 const checkWinner = () => {
-  const mass = getCollectionOfB();
+  const mass = getArryaOfB();
   for (var i = mass.length-1; i > 0; i--) {
     if (i != mass[i-1].innerHTML) break;
     if (i == 1) alert("winner");
   }
 };
 
-const clickHandler = (e) => { // move cheking
-  const { target: el } = e;
-  if (WAIT_ANIM || el.tagName!='B') return;
-  if (el.dataset.id) {
-    const ELEM_ID = getCollectionOfB().indexOf(el);
+const clickHandler = ({ target, target: { dataset, tagName } } = e) => { // move cheking
+  if (WAIT_ANIM || tagName != 'B') return;
+  if (dataset.id) {
+    const ELEM_ID = getArryaOfB().indexOf(target);
     const moveDirection = (() => {
       if (ELEM_ID % 4 == NULL_ID % 4) { // in column
         if (ELEM_ID - 4 == NULL_ID) return "up";
