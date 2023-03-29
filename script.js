@@ -17,6 +17,14 @@ const beginNewGame = () => {
   square.innerHTML = refactor.join('');
 };
 
+const checkWinner = () => {
+  const mass = getArryaOfB();
+  for (var i = mass.length-1; i > 0; i--) {
+    if (i != mass[i-1].innerHTML) break;
+    if (i == 1) alert("winner");
+  }
+};
+
 const moveBrick = (from_id, to_id, direction) => {
   if (!direction) return;
   WAIT_ANIM = true;
@@ -31,14 +39,6 @@ const moveBrick = (from_id, to_id, direction) => {
     WAIT_ANIM = false;
     checkWinner();
   }, delay);
-};
-
-const checkWinner = () => {
-  const mass = getArryaOfB();
-  for (var i = mass.length-1; i > 0; i--) {
-    if (i != mass[i-1].innerHTML) break;
-    if (i == 1) alert("winner");
-  }
 };
 
 const clickHandler = ({ target, target: { dataset, tagName } } = e) => {
