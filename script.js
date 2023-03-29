@@ -3,7 +3,7 @@ const again = document.getElementById("again");
 let NULL_ID = 0;
 let WAIT_ANIMATION = false;
 
-const getArryaOfB = () => [...square?.getElementsByTagName("b")];
+const getArrayOfB = () => [...square?.getElementsByTagName("b")];
 
 const beginNewGame = () => {
   const initial = [];
@@ -18,7 +18,7 @@ const beginNewGame = () => {
 };
 
 const checkWinner = () => {
-  const mass = getArryaOfB();
+  const mass = getArrayOfB();
   for (var i = mass.length-1; i > 0; i--) {
     if (i != mass[i-1].innerHTML) break;
     if (i == 1) alert("winner");
@@ -28,7 +28,7 @@ const checkWinner = () => {
 const moveBrick = (from_id, to_id, direction) => {
   if (!direction) return;
   WAIT_ANIMATION = true;
-  const mass = getArryaOfB();
+  const mass = getArrayOfB();
   const delay = getComputedStyle(mass[from_id]).transitionDuration.replace(/[a-z]/,'') * 1000;
   mass[from_id].classList.add(`--${direction}`);
   setTimeout(() => {
@@ -42,9 +42,8 @@ const moveBrick = (from_id, to_id, direction) => {
 };
 
 const clickHandler = ({ target, target: { dataset, tagName } } = e) => {
-  debugger;
   if (WAIT_ANIMATION || tagName != 'B' && !dataset.hasOwnProperty('brick')) return;
-  const ELEM_ID = getArryaOfB().indexOf(target);
+  const ELEM_ID = getArrayOfB().indexOf(target);
   const moveDirection = (() => {
     if (ELEM_ID % 4 == NULL_ID % 4) { // in column
       if (ELEM_ID - 4 == NULL_ID) return "up";
