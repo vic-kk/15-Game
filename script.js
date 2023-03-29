@@ -20,7 +20,7 @@ const beginNewGame = () => {
 const moveBrick = (from_Id, to_Id, direction) => {
   if (!direction) return;
   WAIT_ANIM = true;
-  const mass = getCollectionOfB(); //mass of fields
+  const mass = getCollectionOfB(); // mass of fields
   mass[from_Id].classList.add(`--${direction}`);
   const delay = getComputedStyle(mass[from_Id]).transitionDuration.replace(/[a-z]/,'') * 1000;
   setTimeout(() => {
