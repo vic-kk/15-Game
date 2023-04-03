@@ -6,13 +6,13 @@ const getBricksArray = () => [...square?.childNodes];
 
 const beginNewGame = () => {
   const initial = [];
-  const refactor = [];
+  const randomPositions = [];
   while (initial.length < 16) { initial.push(initial.length); }
   while (initial.length > 0) {
     const brick = initial.splice(~~(Math.random() * initial.length), 1).at(0);
-    refactor.push(`<b data-brick-id=${refactor.length}>${brick || ''}</b>`);
+    randomPositions.push(`<b data-brick-id=${randomPositions.length}>${brick || ''}</b>`);
   }
-  square.innerHTML = refactor.join('');
+  square.innerHTML = randomPositions.join('');
 };
 
 const checkWinner = () => {
