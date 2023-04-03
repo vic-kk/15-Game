@@ -7,7 +7,7 @@ const getBricksArray = () => [...square?.childNodes];
 const beginNewGame = () => {
   const initial = [];
   const refactor = [];
-  while (initial.length <= 15) { initial.push(initial.length); }
+  while (initial.length < 16) { initial.push(initial.length); }
   while (initial.length > 0) {
     const brick = initial.splice(~~(Math.random() * initial.length), 1).at(0);
     refactor.push(`<b data-brick-id=${refactor.length}>${brick || ''}</b>`);
@@ -17,11 +17,23 @@ const beginNewGame = () => {
 
 const checkWinner = () => {
   const bricks = getBricksArray();
-  for (var i = bricks.length-1; i > 0; i--) {
-    if (i != bricks[i-1].innerHTML) break;
-    if (i == 1) alert("winner");
+  for (var i = bricks.length - 1; i > 0; i--) {
+    if (i != bricks[i - 1].innerHTML) break;
+    if (i == 1) alert("Congrats! You won the game!");
   };
 };
+
+const findDirection = (from_id, to_id) => {
+  if (from_id % 4 == to_id % 4) { // in column
+    if (from_id - 4 == to_id) return "up";
+    if (from_id + 4 == to_id) return "down";
+  };
+  if (~~(from_id / 4) == ~~(to_id / 4)) { // in row
+    if ((from_id % 4) - 1 == to_id % 4) return "left";
+    if ((from_id % 4) + 1 == to_id % 4) return "right";
+  };
+  return null;
+}
 
 const moveBrick = (from_id, to_id, direction) => {
   if (!direction) return;
@@ -38,22 +50,12 @@ const moveBrick = (from_id, to_id, direction) => {
   }, delay);
 };
 
-const fieldClickHandler = ({ target: { dataset: clicked_brick } } = e) => {
+const fieldClickHandler = ({ target: { dataset: clickedDataset } } = e) => {
   if (WAIT_ANIMATION) return;
-  if (!clicked_brick.hasOwnProperty('brickId')) return;
-  const clicked_id = Number(clicked_brick.brickId);
+  if (!clickedDataset.hasOwnProperty('brickId')) return;
+  const clicked_id = Number(clickedDataset.brickId);
   const null_id = Number(getBricksArray().find(brick => brick.innerHTML === '').dataset.brickId);
-  const moveDirection = (() => {
-    if (clicked_id % 4 == null_id % 4) { // in column
-      if (clicked_id - 4 == null_id) return "up";
-      if (clicked_id + 4 == null_id) return "down";
-    };
-    if (~~(clicked_id / 4) == ~~(null_id / 4)) { // in row
-      if ((clicked_id % 4) - 1 == null_id % 4) return "left";
-      if ((clicked_id % 4) + 1 == null_id % 4) return "right";
-    };
-    return null;
-  })();
+  const moveDirection = findDirection(clicked_id, null_id);
   if (moveDirection) moveBrick(clicked_id, null_id, moveDirection);
 };
 
