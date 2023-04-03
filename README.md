@@ -1,7 +1,6 @@
 # 15-Game
-Simple and workable 15-game in vanillaJS with responsive layout.
+_Copy from [Codepen.io](https://codepen.io/karasev/pen/ONeVQE)_
+
+**Simple and workable 15-game in VanillaJS with responsive layout.**
 
 Have a nice game
-
------
-Also at [Codepen.io](https://codepen.io/karasev/pen/ONeVQE)
